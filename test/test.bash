@@ -6,39 +6,33 @@ dir=~
 [ "$1" != "" ] && dir="$1"
 
 cd $dir/ros2_ws
+
+# 1. ROS 2 本体の環境を読み込む（これが重要！）
+source /opt/ros/humble/setup.bash
+
+# 2. ビルド
 colcon build
 source install/setup.bash
 
-# 1. 最初はデバイスがない状態で起動（標準エラーをログに含めるため 2>&1 を使用）
-timeout 15 ros2 launch mypkg monitor.launch.py > /tmp/mypkg.log 2>&1 &
-LAUNCH_PID=$!
+# 3. 実行（timeout内でbash -cを使うことで、確実にパスを通す）
+timeout 15 bash -c "source /opt/ros/humble/setup.bash && source install/setup.bash && ros2 launch mypkg monitor.launch.py" > /tmp/mypkg.log 2>&1 &
 
+sleep 10  # 起動まで少し長めに待つ
+
+# 4. ファイルを作成して復旧をシミュレート
+touch /tmp/dummy_device
 sleep 5
 
-# 2. デバイスファイルを作成（復旧をシミュレート）
-touch /tmp/dummy_device
-sleep 3
-
-# 3. デバイスファイルを削除（紛失をシミュレート）
+# 5. ファイルを削除して紛失をシミュレート
 rm /tmp/dummy_device
-sleep 3
+sleep 5
 
-# 4. ログを確認して期待する文字列があるかチェック
+# 6. ログを確認
 cat /tmp/mypkg.log
 
-# 復旧時のメッセージがあるか
-grep "INFO: Device reconnected." /tmp/mypkg.log
-if [ $? -ne 0 ]; then
-    echo "Test failed: 'reconnected' message not found"
-    exit 1
-fi
-
-# 紛失時のメッセージがあるか
-grep "ALERT: Device lost!" /tmp/mypkg.log
-if [ $? -ne 0 ]; then
-    echo "Test failed: 'lost' message not found"
-    exit 1
-fi
+# 判定
+grep "INFO: Device reconnected." /tmp/mypkg.log || (echo "Test failed: reconnected message not found"; exit 1)
+grep "ALERT: Device lost!" /tmp/mypkg.log || (echo "Test failed: lost message not found"; exit 1)
 
 echo "Test passed!"
 exit 0
