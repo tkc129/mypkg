@@ -14,12 +14,13 @@ class Alerter(Node):
         self.last_status = True
 
     def cb(self, msg):
-        # 状態が True (あり) から False (なし) に変わった瞬間だけ警告
         if self.last_status and not msg.data:
             sys.stderr.write("ALERT: Device lost!\n")
+            sys.stderr.flush()
         elif not self.last_status and msg.data:
-            sys.stderr.write("INFO: Device recovered.\n")
-
+            sys.stderr.write("INFO: Device reconnected.\n")
+            sys.stderr.flush() 
+        
         self.last_status = msg.data
 
 def main():
