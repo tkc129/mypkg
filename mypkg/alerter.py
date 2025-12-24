@@ -1,20 +1,33 @@
+#!/usr/bin/python3
+# SPDX-FileCopyrightText: 2025 Takashi Iwasaki
+# SPDX-License-Identifier: BSD-3-Clause
+
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import Int16
+from std_msgs.msg import Bool
+import sys
 
-rclpy.init()
-node = Node("talker")
-pub = node.create_publisher(Int16, "countup", 10)
-n = 0
+class Alerter(Node):
+    def __init__(self):
+        super().__init__('alerter')
+        self.sub = self.create_subscription(Bool, 'device_status', self.cb, 10)
+        self.last_status = True
 
-def cb():
-    global n
-    msg = Int16()
-    msg.data = n
-    pub.publish(msg)
-    n += 1
+    def cb(self, msg):
+        # 状態が True (あり) から False (なし) に変わった瞬間だけ警告
+        if self.last_status and not msg.data:
+            sys.stderr.write("ALERT: Device lost!\n")
+        elif not self.last_status and msg.data:
+            sys.stderr.write("INFO: Device recovered.\n")
 
+        self.last_status = msg.data
 
 def main():
-    node.create_timer(0.5, cb)
+    rclpy.init()
+    node = Alerter()
     rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()

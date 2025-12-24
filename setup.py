@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 import os
 from glob import glob
 
-package_name = 'mypkg'
+package_name = 'mypkg' # パッケージ名を mypkg のままにする場合はこのままでOK
 
 setup(
     name=package_name,
@@ -12,23 +12,21 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        (os.path.join('share',package_name),glob('launch/*.launch.py'))
+        # Launchファイルをインストール対象に含める（ボーナス獲得に必須）
+        (os.path.join('share', package_name), glob('launch/*.launch.py')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='tkcs129',
     maintainer_email='s24c1018lq@s.chibakoudai.jp',
-    description='ロボットシステム学',
+    description='USB device presence monitor with ROS 2', # 具体的な説明に変更
     license='BSD-3-Clause',
-    extras_require={
-        'test': [
-            'pytest',
-        ],
-    },
+    tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'talker = mypkg.talker:main',
-            'listener = mypkg.listener:main',
+            # 実行コマンド名 = パッケージ名.ファイル名:関数名
+            'detector = mypkg.detector:main',
+            'alerter = mypkg.alerter:main',
         ],
     },
 )
