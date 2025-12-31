@@ -9,8 +9,8 @@ Linux上のファイル,USBデバイスの存在を定期的に監視し、接�
 - Ubuntu 22.04.5 LTS
 
 ## ノード
-device_monitor
-指定したファイルまたはデバイスファイルの存在を監視し，結果を publish します。
+- detectorノード: 指定したパスの存在を監視し、結果を配信します。
+- alerterノード: detectorの結果を受け取り、状態に応じたメッセージを表示します。
 
 ## トピック
 device_status
@@ -26,7 +26,7 @@ device_status
 
 ```
 $ git clone https://github.com/tkc129/mypkg.git
-$ cd ~/ross
+$ cd ~/ros2_ws
 $ colcon build
 $ source install/setup.bash
 ```
@@ -44,15 +44,17 @@ $ ros2 topic echo /device_status
 ## 実行例
 接続されている場合
 ```
+$ ros2 topic echo /device_status
 data: true
 ```
 接続されていない場合
 ```
+$ ros2 topic echo /device_status
 data: false
 ```
 
 ## テスト環境
-- Ubuntu 24.04.3 LTS
+-  Ubuntu 22.04.5 LTS
 
 ## ライセンス
 - このソフトウェアパッケージは，3条項BSDライセンスの下，再頒布および使用が許可されます。
