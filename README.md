@@ -8,7 +8,7 @@
 以下の環境、ソフトウェアにおいてプログラムの実行及びテストを確認しています。
 - Ubuntu 22.04.5 LTS
 
-## 実行方法
+## 事前準備
 "git"コマンドを使用してリポジトリをクローンし、ros2_wsに移動する事で実行できます。
 
 ```
@@ -16,6 +16,13 @@ $ git clone https://github.com/tkc129/mypkg.git
 $ cd ~/ross
 $ colcon build
 $ source install/setup.bash
+```
+
+## 実行方法
+Launchファイルを使用して、監視ノードとアラートノードを同時に起動します。
+```
+$ ros2 launch mypkg monitor.launch.py
+$ ros2 topic echo /device_status
 ```
 
 ## 実行例
