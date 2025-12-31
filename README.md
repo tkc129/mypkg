@@ -6,16 +6,14 @@
 
 ## 実行環境
 以下の環境、ソフトウェアにおいてプログラムの実行及びテストを確認しています。
-- 
-- 
+- Ubuntu 22.04.5 LTS
 
 ## 実行方法
 "git"コマンドを使用してリポジトリをクローンし、ros2_wsに移動する事で実行できます。
 
 ```
-$ cd ~/ros2_ws/src
-$ git clone https://github.com/tkc129/robosys2025.git
-$ cd ~/ros2_ws
+$ git clone https://github.com/tkc129/mypkg.git
+$ cd ~/ross
 $ colcon build
 $ source install/setup.bash
 ```
