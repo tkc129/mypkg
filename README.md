@@ -1,8 +1,8 @@
-# robosys2025
+# mypkg
 ロボットシステム学の課題用ファイルをまとめたリポジトリです。
 
 ## 概要
-
+Linux上のファイル,USBデバイスの存在を定期的に監視し、接続状態を判定してROS2トピックとしてpublishします。
 
 ## 実行環境
 以下の環境、ソフトウェアにおいてプログラムの実行及びテストを確認しています。
@@ -22,12 +22,20 @@ $ source install/setup.bash
 Launchファイルを使用して、監視ノードとアラートノードを同時に起動します。
 ```
 $ ros2 launch mypkg monitor.launch.py
+```
+別ターミナルでトピックの内容を確認できます。
+```
 $ ros2 topic echo /device_status
 ```
 
 ## 実行例
+接続されている場合
 ```
-$ a
+data: true
+```
+接続されていない場合
+```
+data: false
 ```
 
 ## テスト環境
