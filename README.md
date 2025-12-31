@@ -1,5 +1,6 @@
 # mypkg
 ロボットシステム学課題2
+![test](https://github.com/tkc129/mypkg/actions/workflows/test.yml/badge.svg)
 
 ## 概要
 Linux上のファイル,USBデバイスの存在を定期的に監視し、接続状態を判定してROS2トピックとしてpublishします。
