@@ -4,7 +4,7 @@
 ![test](https://github.com/tkc129/mypkg/actions/workflows/test.yml/badge.svg)
 
 ## 概要
-Linux上のファイル,USBデバイスの存在を定期的に監視し、接続状態を判定してROS2トピックとしてpublishします。
+Linux上のファイル、USBデバイスの存在を定期的に監視し、接続状態を判定してROS2トピックとしてpublishします。
 
 ## 実行環境
 以下の環境、ソフトウェアにおいてプログラムの実行及びテストを確認しています。
