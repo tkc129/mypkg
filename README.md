@@ -43,11 +43,24 @@ $ ros2 topic echo /device_status
 ```
 $ ros2 topic echo /device_status
 data: true
+---
+data: true
+---
+data: true
+---
+...
 ```
 接続されていない場合
 ```
 $ ros2 topic echo /device_status
 data: false
+data: false
+---
+data: false
+---
+data: false
+---
+...
 ```
 
 ## テスト環境
