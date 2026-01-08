@@ -54,7 +54,6 @@ data: true
 ```
 $ ros2 topic echo /device_status
 data: false
-data: false
 ---
 data: false
 ---
