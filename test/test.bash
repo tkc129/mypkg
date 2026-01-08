@@ -31,11 +31,17 @@ sleep 5
 cat /tmp/mypkg.log
 
 # 判定
+# 判定
 grep "INFO: Device reconnected." /tmp/mypkg.log || {
   echo "Test failed: reconnected message not found"
   exit 1
 }
-grep "ALERT: Device lost!" /tmp/mypkg.log || (echo "Test failed: lost message not found"; exit 1)
+
+grep "ALERT: Device lost!" /tmp/mypkg.log || {
+  echo "Test failed: lost message not found"
+  exit 1
+}
 
 echo "Test passed!"
 exit 0
+
