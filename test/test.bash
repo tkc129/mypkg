@@ -31,7 +31,6 @@ sleep 5
 cat /tmp/mypkg.log
 
 # 判定
-# 判定
 grep "INFO: Device reconnected." /tmp/mypkg.log || {
   echo "Test failed: reconnected message not found"
   exit 1
