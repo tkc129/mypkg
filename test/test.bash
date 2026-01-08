@@ -7,27 +7,27 @@ dir=~
 
 cd $dir/ros2_ws
 
-# 1. ROS 2 本体の環境を読み込む（これが重要！）
+# 1
 source /opt/ros/humble/setup.bash
 
-# 2. ビルド
+# 2
 colcon build
 source install/setup.bash
 
-# 3. 実行（timeout内でbash -cを使うことで、確実にパスを通す）
+# 3
 timeout 15 bash -c "source /opt/ros/humble/setup.bash && source install/setup.bash && ros2 launch mypkg monitor.launch.py" > /tmp/mypkg.log 2>&1 &
 
-sleep 10  # 起動まで少し長めに待つ
+sleep 10
 
-# 4. ファイルを作成して復旧をシミュレート
+# 4
 touch /tmp/dummy_device
 sleep 5
 
-# 5. ファイルを削除して紛失をシミュレート
+# 5
 rm /tmp/dummy_device
 sleep 5
 
-# 6. ログを確認
+# 6
 cat /tmp/mypkg.log
 
 # 判定
