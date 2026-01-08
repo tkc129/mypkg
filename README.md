@@ -4,7 +4,7 @@
 ![test](https://github.com/tkc129/mypkg/actions/workflows/test.yml/badge.svg)
 
 ## 概要
-Linux上のファイル、USBデバイスの存在を定期的に監視し、接続状態を判定してROS2トピックとしてpublishします。
+Linux上のファイル、USBデバイスの存在を定期的に監視し、接続状態を判定してROS 2トピックとしてpublishします。
 
 ## 実行環境
 以下の環境、ソフトウェアにおいてプログラムの実行及びテストを確認しています。
@@ -26,7 +26,7 @@ device_status
 - false: 指定したパスが存在しない
 
 ## 事前準備
-本パッケージはROS2Humble環境において、colconによるビルドおよび`install/setup.bash`のsourceが行われていることを前提とします。
+本パッケージはROS 2環境において、colconによるビルドおよび`install/setup.bash`のsourceが行われていることを前提とします。
 
 ## 実行方法
 Launchファイルを使用して、監視ノードとアラートノードを同時に起動します。
