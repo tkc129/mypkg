@@ -26,14 +26,7 @@ device_status
 - false: 指定したパスが存在しない
 
 ## 事前準備
-"git"コマンドを使用してリポジトリをクローンし、ros2_wsに移動する事で実行できます。
-
-```
-$ git clone https://github.com/tkc129/mypkg.git
-$ cd ~/ros2_ws
-$ colcon build
-$ source install/setup.bash
-```
+本パッケージはROS2Humble環境において、colconによるビルドおよび`install/setup.bash`のsourceが行われていることを前提とします。
 
 ## 実行方法
 Launchファイルを使用して、監視ノードとアラートノードを同時に起動します。
